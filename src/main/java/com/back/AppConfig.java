@@ -7,8 +7,12 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    PersonService personService() {
-        System.out.println("postService 빈 생성됨!");
-        return new PersonService();
+    PersonRepository personRepository() {
+        return new PersonRepository(1);
+    }
+
+    @Bean
+    PersonRepository personRepositoryV2() {
+        return new PersonRepository(2);
     }
 }
