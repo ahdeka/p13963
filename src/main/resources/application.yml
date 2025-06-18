@@ -1,3 +1,5 @@
 spring:
- application:
-  name: p13963
+  application:
+  output:
+    ansi:
+      enabled: ALWAYS
