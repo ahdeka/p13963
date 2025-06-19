@@ -1,5 +1,6 @@
 package com.back;
 
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -7,12 +8,18 @@ import org.springframework.context.annotation.Configuration;
 public class AppConfig {
 
     @Bean
-    PersonRepository personRepository() {
-        return new PersonRepository(1);
+    int version() {
+        return 55;
     }
 
     @Bean
-    PersonRepository personRepositoryV2() {
-        return new PersonRepository(2);
+    public ApplicationRunner myApplicationRunner(){
+        return new MyApplicationRunner();
     }
+
+    @Bean
+    public ApplicationRunner myApplicationRunner2(){
+        return new MyApplicationRunner();
+    }
+
 }
