@@ -1,11 +1,17 @@
 package com.back;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 @Configuration
 public class AppConfig {
+
+    @Autowired
+    @Lazy
+    private AppConfig self;
 
     @Bean
     int version() {
@@ -13,13 +19,27 @@ public class AppConfig {
     }
 
     @Bean
-    public ApplicationRunner myApplicationRunner(){
-        return new MyApplicationRunner();
+    ApplicationRunner myApplicationRunner() {
+        return args -> System.out.println("MyApplicationRunner is running with args: " + args.getSourceArgs().length);
     }
 
+
     @Bean
-    public ApplicationRunner myApplicationRunner2(){
-        return new MyApplicationRunner();
+    ApplicationRunner myApplicationRunner2() {
+        return args -> {
+            self.work1();
+            self.work2();
+        };
+    }
+
+
+    private void work1() {
+        System.out.println("work1 is running");
+    }
+
+
+    private void work2() {
+        System.out.println("work2 is running");
     }
 
 }
